@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:18.0-alpine
+    container_name: budgetmate-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: budgetmate
+      POSTGRES_USER: budgetmate
+      POSTGRES_PASSWORD: budgetmate
+    ports:
+      - "5432:5432"
+    volumes:
+      - budgetmate_pgdata:/var/lib/postgresql/data
+    networks:
+      - budgetmate-net
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: budgetmate-backend
+    depends_on:
+      - db
+    environment:
+      # Spring datasource config - Docker internal hostname: db
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/budgetmate
+      SPRING_DATASOURCE_USERNAME: budgetmate
+      SPRING_DATASOURCE_PASSWORD: budgetmate
+      # SPRING_PROFILES_ACTIVE: docker
+      # Flyway
+      # SPRING_FLYWAY_ENABLED: "true"
+    ports:
+      - "8080:8080"
+    networks:
+      - budgetmate-net
+
+volumes:
+  budgetmate_pgdata:
+
+networks:
+  budgetmate-net:
+    driver: bridge
