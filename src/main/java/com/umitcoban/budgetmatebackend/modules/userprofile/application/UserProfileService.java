@@ -24,6 +24,12 @@ public class UserProfileService {
 		UserProfile profile = UserProfile.of(email, fullName);
 		return repository.save(profile);
 	}
+
+    @Transactional()
+    public UserProfile getByEmail(String email) {
+        return repository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("UserProfile not found for email " + email));
+    }
 	
 	@Transactional()
 	public UserProfile getById(Long id) {

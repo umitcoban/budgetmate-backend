@@ -7,6 +7,7 @@ import com.umitcoban.budgetmatebackend.modules.userprofile.infrastructure.web.dt
 import jakarta.validation.Valid;
 import lombok.NonNull;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -30,6 +31,13 @@ public class UserProfileController {
 				.created(URI.create("/api/user-profiles/" + response.id()))
 				.body(response);
 	}
+
+    @GetMapping("/me")
+    public UserProfileResponse me(Authentication authentication) {
+        String email = authentication.getName();
+        UserProfile profile = service.getByEmail(email);
+        return toResponse(profile);
+    }
 	
 	@GetMapping("/{id}")
 	public UserProfileResponse getById(@PathVariable Long id) {

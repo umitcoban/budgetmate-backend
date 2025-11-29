@@ -13,4 +13,6 @@ public interface UserProfileRepositoryPort {
 	List<UserProfile> findAll();
 	
 	boolean existsByEmail(String email);
+
+    Optional<UserProfile> findByEmail(String email);
 }

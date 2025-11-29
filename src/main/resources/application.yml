@@ -17,9 +17,18 @@ spring:
   flyway:
     enabled: true
     baseline-on-migrate: false
+  modulith:
+    events:
+      republish-outstanding-events-on-restart: true
 
 management:
   endpoints:
     web:
       exposure:
         include: health,info
+
+app:
+  security:
+    jwt:
+      secret: "CHANGE_THIS_SECRET_TO_SOMETHING_RANDOM_AND_LONG"
+      access-token-validity-seconds: 3600

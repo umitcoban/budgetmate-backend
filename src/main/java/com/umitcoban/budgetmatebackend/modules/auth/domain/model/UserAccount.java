@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Getter
 public class UserAccount {
-	long id;
+	Long id;
 	String email;
 	String passwordHash;
 	private final Set<String> roles;

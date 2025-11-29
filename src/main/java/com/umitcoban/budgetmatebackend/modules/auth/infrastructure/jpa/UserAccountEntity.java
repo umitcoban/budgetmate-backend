@@ -1,4 +1,4 @@
-package com.umitcoban.budgetmatebackend.modules.auth.application.jpa;
+package com.umitcoban.budgetmatebackend.modules.auth.infrastructure.jpa;
 
 import jakarta.persistence.*;
 import lombok.Getter;
