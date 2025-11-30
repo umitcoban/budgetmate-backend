@@ -40,6 +40,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
     implementation("com.nimbusds:nimbus-jose-jwt:10.6")
     implementation("org.mapstruct:mapstruct:1.6.3")
+    implementation("org.jeasy:easy-rules-core:4.1.0")
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("org.postgresql:postgresql")
     runtimeOnly("org.springframework.modulith:spring-modulith-actuator")
